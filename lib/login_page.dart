@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final Function()? onTap;
+  const LoginPage({super.key, required this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -75,14 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     const Text("you dont have Account? "),
                     GestureDetector(
-                      onTap: () {
-                        // Hapa tutaweka logic ya kubadili kwenda Register
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context)=> const RegisterPage(),
-                        ),
-                        );
-                      },
+                      onTap: widget.onTap,
                       child: const Text("Register Now", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
                     ),
                   ],

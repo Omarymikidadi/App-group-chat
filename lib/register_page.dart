@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final Function()? onTap;
+  const RegisterPage({super.key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -32,17 +33,6 @@ class _RegisterPageState extends State<RegisterPage> {
         'isOnline': true,
       });
 
-      //Toa mtumiaji nje
-      await FirebaseAuth.instance.signOut();
-
-      //kumpeleka login page
-
-      if (mounted) {
-        Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Account created! You can login.")),
-        );
-      }
     } catch (e) {
      print(e.toString());
     }
@@ -98,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     const Text("You have account? "),
                     GestureDetector(
-                      onTap: () => Navigator.pop(context), // Inamrudisha nyuma kwenye Login
+                      onTap: widget.onTap, // Inamrudisha nyuma kwenye Login
                       child: const Text("Login", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
                     ),
                   ],
